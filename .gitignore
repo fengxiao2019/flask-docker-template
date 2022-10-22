@@ -1,4 +1,3 @@
 __pycache__/
-services/web/env
-# vscode
+services/web/env/
 .vscode/
