@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./services/web
+    command: python manage.py run -h 0.0.0.0
+    volumes:
+      - ./services/web/:/tmp/data/work/
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - fuxi-mysql
+
+  fuxi-mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'fuxi'
+      MYSQL_USER: 'shao1234'
+      MYSQL_PASSWORD: 'shao1234'
+      MYSQL_ROOT_PASSWORD: 'shaoyz1234'
+    ports:
+      - '6033:3306'
+    volumes:
+      - "fuxi_data:/var/lib/mysql"
+
+volumes:
+    fuxi_data:
